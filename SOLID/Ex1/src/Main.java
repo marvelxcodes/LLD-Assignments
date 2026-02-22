@@ -1,7 +1,9 @@
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("=== Student Onboarding ===");
-        FakeDb db = new FakeDb();
+        DatabasePersistance db = new DatabasePersistance();
         OnboardingService svc = new OnboardingService(db);
 
         String raw = "name=Riya;email=riya@sst.edu;phone=9876543210;program=CSE";
@@ -9,6 +11,8 @@ public class Main {
 
         System.out.println();
         System.out.println("-- DB DUMP --");
-        System.out.print(TextTable.render3(db));
+        
+        List<StudentRecord> studentRecords = db.all();
+        System.out.print(Formatter.renderStudents(studentRecords));
     }
 }
